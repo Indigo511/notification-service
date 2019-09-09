@@ -1,0 +1,30 @@
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      threshold: INFO
+      currentLogFilename: ./run/logs/application.log
+      archive: true
+      archivedLogFilenamePattern: ./run/logs/archive/application-%d{yyyy-MM-dd-HH}.log
+      archivedFileCount: 76
+      timeZone: UTC
+      logFormat: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{26} - %mdc - %msg%n%ex{full}"
+
+server:
+  applicationContextPath: /notify/service/
+  adminContextPath: /
+  applicationConnectors:
+    - type: http
+      port: 9080
+  adminConnectors:
+    - type: http
+      port: 9081
+  maxThreads: 1024
+  allowedMethods:
+    - GET
+    - PUT
+    - POST
+
+externalServices:
+  sendSMSAPI:
+  sendMailAPI:
